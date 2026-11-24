@@ -39,10 +39,16 @@ Who opened the door (this card, Telegram, courier mode) is not recorded anywhere
 
 ## Installation
 
+### Home Assistant Marketplace (2026.11+)
+
+Settings → Marketplace → *Add from link* → `dimabutenko/ha-intercom-card` → *Add*, then open the repository and
+install it (type *Dashboard*). It is installed into `www/community` and registered as a dashboard resource; reload the
+browser afterwards.
+
 ### HACS
 
-HACS → ⋮ → *Custom repositories* → add `https://github.com/dimabutenko/ha-intercom-card` with type *Dashboard*
-(Lovelace), then download **Intercom Card**.
+On Home Assistant versions that still use HACS: HACS → ⋮ → *Custom repositories* → add
+`https://github.com/dimabutenko/ha-intercom-card` with type *Dashboard* (Lovelace), then download **Intercom Card**.
 
 ### Manual
 
