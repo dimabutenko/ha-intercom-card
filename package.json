@@ -1,0 +1,12 @@
+{
+  "name": "ha-intercom-card",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --format=esm --target=es2020 --outfile=intercom-card.js --banner:js=\"/* Generated from src/ by 'npm run build' - do not edit. */\""
+  },
+  "devDependencies": {
+    "@mdi/js": "7.4.47",
+    "esbuild": "0.25.0"
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- Local preview with a fake `hass` (no Home Assistant needed):
+     npm run build, then open dev/preview.html (add ?lang=ru to switch language). -->
+<html><head><meta charset="utf-8"><title>intercom-card preview</title>
+<style>body{margin:0;padding:24px;background:#111318;display:flex;gap:24px;flex-wrap:wrap;font-family:sans-serif}
+.cell{width:440px}.cap{color:#9aa0a6;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}</style></head>
+<body>
+<script type="module">
+import "../intercom-card.js";
+const lang = new URLSearchParams(location.search).get("lang") || "ru";
+const P = "domofon", now = Date.now(), iso = (ms) => new Date(ms).toISOString();
+const ago = (m) => now - m * 60000;
+const E = { ring:`binary_sensor.${P}_doorbell_ring`, code:`binary_sensor.${P}_code_entry`, door:`button.${P}_open_door`, gate:`button.${P}_open_gate`,
+  rej:`button.${P}_reject_call`, cour:`switch.${P}_courier_mode`, mute:`switch.${P}_mute`, ant:`switch.${P}_external_antenna`, wifi:`sensor.${P}_wifi_signal` };
+
+// recorder rows in the minimal_response format: {s: state, lu: epoch seconds}
+const row = (s, ms) => ({ s, lu: ms / 1000 });
+const day = 86400000, start = now - 7 * day;
+function history(scene) {
+  const h = {
+    [E.ring]: [row("off", start), row("on", ago(1500)), row("off", ago(1500) + 18000), row("on", ago(1210)), row("off", ago(1210) + 25000),
+               row("on", ago(1209)), row("off", ago(1209) + 9000), row("on", ago(190)), row("off", ago(190) + 22000), row("on", ago(70)), row("off", ago(70) + 14000)],
+    [E.code]: [row("off", start), row("on", ago(1000)), row("off", ago(1000) + 3000), row("on", ago(2900)), row("off", ago(2900) + 4000)],
+    [E.door]: [row(iso(ago(1190)), start), row(iso(ago(1190)), ago(1190)), row(iso(ago(189)), ago(189))],
+    [E.gate]: [row(iso(ago(5000)), start), row(iso(ago(5000)), ago(5000))],
+    [E.rej]:  [row("unknown", start), row(iso(ago(69)), ago(69))],
+    [E.cour]: [row("off", start), row("on", ago(2000)), row("off", ago(1990)), row("on", ago(300)), row("off", ago(299))],
+  };
+  if (scene === "ring") h[E.ring].push(row("on", now - 12000));
+  if (scene === "courier") h[E.cour].push(row("on", ago(5)));
+  return h;
+}
+function make(scene) {
+  const st = (id, state, ms = ago(600), attrs = {}) => ({ entity_id: id, state, last_changed: iso(ms), attributes: attrs });
+  const off = scene === "offline" ? "unavailable" : null;
+  const states = {
+    [E.ring]: st(E.ring, off || (scene === "ring" ? "on" : "off"), scene === "ring" ? now - 12000 : ago(70)),
+    [E.code]: st(E.code, off || "off"), [E.door]: st(E.door, off || iso(ago(189))), [E.gate]: st(E.gate, off || iso(ago(5000))),
+    [E.rej]: st(E.rej, off || iso(ago(69))), [E.cour]: st(E.cour, off || (scene === "courier" ? "on" : "off")),
+    [E.mute]: st(E.mute, off || "on"), [E.ant]: st(E.ant, off || "off"), [E.wifi]: st(E.wifi, off || "-75.0", ago(1), { unit_of_measurement: "dBm" }),
+  };
+  return { states, language: lang, locale: { language: lang },
+    callWS: async (msg) => (console.log("WS", msg.type), history(scene)),
+    callService: (d, s, data) => console.log("SERVICE", d, s, data) };
+}
+for (const [scene, title] of [["idle", "1 · idle"], ["ring", "2 · ring"], ["courier", "3 · courier"], ["offline", "4 · offline"]]) {
+  const cell = document.createElement("div"); cell.className = "cell";
+  cell.innerHTML = `<div class="cap">${title}</div>`;
+  const card = document.createElement("intercom-card");
+  card.setConfig({ prefix: P });
+  card.hass = make(scene);
+  cell.appendChild(card); document.body.appendChild(cell);
+  window[scene] = card;
+}
+</script></body></html>
