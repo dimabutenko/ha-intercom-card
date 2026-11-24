@@ -4,6 +4,7 @@ import { icon } from "./icons.js";
 export function buildTemplate(t) {
   const tab = (id) => `<button class="tab" data-filter="${id}">${t(`filters.${id}`)}</button>`;
   return `
+<ha-card>
 <div class="unit">
   <div class="lcd">
     <div class="hd">
@@ -31,5 +32,6 @@ export function buildTemplate(t) {
     <button class="tg courier" data-act="courier"><span class="led"></span><div>${t("toggles.courier")}<small></small></div></button>
     <button class="tg mute" data-act="mute"><span class="led"></span><div>${t("toggles.mute")}<small></small></div></button>
   </div>
-</div>`;
+</div>
+</ha-card>`;
 }

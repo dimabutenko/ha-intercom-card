@@ -1,7 +1,12 @@
 // Card CSS. The card draws its own wall panel (light plastic body, colour LCD),
-// so it looks the same in light and dark Home Assistant themes.
+// so it looks the same in light and dark Home Assistant themes. The panel itself is
+// the card: ha-card is stripped of its background, border, shadow and padding so
+// no container is visible, and its clipping is lifted so the ring glow is not cut off.
 export const STYLES = `
 :host { display: block; }
+ha-card {
+  display: block; background: none; border: none; box-shadow: none; border-radius: 0; padding: 0; overflow: visible;
+}
 * { box-sizing: border-box; margin: 0; }
 button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; padding: 0; -webkit-tap-highlight-color: transparent; }
 svg { width: 1em; height: 1em; fill: currentColor; display: block; }

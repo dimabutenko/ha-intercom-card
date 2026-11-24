@@ -19,8 +19,8 @@ and mute switches), but every entity is configurable. No brand marks, shapes onl
 - **History on the screen.** Rings (with duration), code entries, door and gate openings, rejected calls and courier mode
   on/off, grouped by day. Filters: All / Rings / Codes / Openings. Tap a row for the exact time and the length of a call.
   Taken from the recorder, so it survives restarts; the list refreshes by itself when something happens.
-- **Keys that make sense.** *Open door* and *Reject* are only live during a call (the intercom ignores them otherwise) and
-  the door key pulses while it rings. *Gate* works any time.
+- **Keys that make sense.** *Open door*, *Gate* and *Reject* are only live during a call (the intercom ignores them
+  otherwise) and the door key pulses while it rings.
 - **Courier mode** (any ring opens the door by itself) is a lit toggle with a clear hint; the screen turns blue while it is on.
 - **Mute** toggle, signal bars and a settings page (external antenna, Wi-Fi level, device state) behind the gear.
 - Adapts to the entities you have: keys and toggles for missing entities are hidden.

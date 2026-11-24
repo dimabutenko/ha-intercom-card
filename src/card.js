@@ -178,10 +178,8 @@ export class IntercomCard extends HTMLElement {
     $(".settings .ant").classList.toggle("hidden", !this._id("antenna"));
     $(".sec").classList.toggle("hidden", !this._id("courier") && !this._id("mute"));
 
-    // Door and reject only make sense during a call; the gate works any time.
-    $('[data-act="door"]').disabled = !(v.online && v.ring);
-    $('[data-act="reject"]').disabled = !(v.online && v.ring);
-    $('[data-act="gate"]').disabled = !v.online;
+    // The intercom opens the door, the gate and rejects only during a call.
+    for (const act of ["door", "gate", "reject"]) $(`[data-act="${act}"]`).disabled = !(v.online && v.ring);
 
     const t = this._t;
     const tg = (sel, on, hint) => {
