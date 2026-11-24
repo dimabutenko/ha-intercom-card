@@ -13,7 +13,7 @@ svg { width: 1em; height: 1em; fill: currentColor; display: block; }
 
 .unit {
   --amber: #ffb020; --blue: #4f9dff; --green: #3ecf8e; --red: #ff5a5f;
-  width: 100%; max-width: 440px; margin: 0 auto; padding: 16px; border-radius: 26px; color: #333;
+  width: 100%; margin: 0; padding: 16px; border-radius: 26px; color: #333;
   background: linear-gradient(160deg, #f1eee6, #d6d2c6);
   box-shadow: inset 0 2px 0 rgba(255,255,255,.7), inset 0 -3px 6px rgba(0,0,0,.18), 0 10px 24px rgba(0,0,0,.35);
   font-family: var(--paper-font-body1_-_font-family, Roboto, "Segoe UI", Arial, sans-serif);
