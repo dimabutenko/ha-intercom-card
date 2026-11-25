@@ -9,7 +9,7 @@ export function buildTemplate(t) {
   <div class="lcd">
     <div class="hd">
       <span class="name"></span>
-      <span class="hd-r"><span class="sig"></span><button class="gear" data-act="settings">${icon("gear")}</button></span>
+      <span class="hd-r"><span class="conn"></span><span class="sig"></span><button class="gear" data-act="settings">${icon("gear")}</button></span>
     </div>
     <div class="st"></div>
     <div class="tabs">${["all", "ring", "code", "open"].map(tab).join("")}</div>

@@ -1,6 +1,6 @@
 import {
   mdiBellRing, mdiDialpad, mdiDoorOpen, mdiGate, mdiHandBackRight, mdiKeyVariant,
-  mdiPackageVariantClosed, mdiVolumeOff, mdiVolumeHigh, mdiCog, mdiClose, mdiHistory, mdiWifi, mdiWifiOff,
+  mdiPackageVariantClosed, mdiVolumeOff, mdiVolumeHigh, mdiCog, mdiClose, mdiHistory,
 } from "@mdi/js";
 
 // Inline SVG (no dependency on <ha-icon>, so it looks the same everywhere).
@@ -16,7 +16,7 @@ const PATHS = {
   sound: mdiVolumeHigh,
   gear: mdiCog,
   close: mdiClose,
-  history: mdiHistory, mdiWifi, mdiWifiOff,
+  history: mdiHistory,
 };
 
 export function icon(name) {

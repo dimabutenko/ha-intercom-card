@@ -14,13 +14,13 @@ const result = {
 };
 const ev = parseHistory(result, E, start);
 const kinds = ev.map((e) => e.kind);
-assert.deepEqual(kinds, ["ring", "offline", "courier_on", "door", "ring"]);
-assert.equal(ev[4].durationMs, 20000);
+assert.deepEqual(kinds, ["ring", "courier_on", "door", "ring"]);
+assert.equal(ev[3].durationMs, 20000);
 assert.equal(ev[0].durationMs, null);
 
 // A reconnect (unavailable -> off) is not the courier mode being switched off.
 const re = parseHistory({ k: [{ s: "off", lu: start / 1000 }, { s: "unavailable", lu: sec("2026-11-22T10:00:00Z") },
   { s: "off", lu: sec("2026-11-22T10:00:01Z") }, { s: "on", lu: sec("2026-11-22T11:00:00Z") }, { s: "off", lu: sec("2026-11-22T11:05:00Z") }] },
   { courier: "k" }, start).map((e) => e.kind);
-assert.deepEqual(re, ["courier_off", "courier_on", "online", "offline"]);
+assert.deepEqual(re, ["courier_off", "courier_on"]);
 console.log("history parser OK:", kinds.join(", "));

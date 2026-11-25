@@ -193,6 +193,7 @@ export class IntercomCard extends HTMLElement {
 
     $(".name").textContent = this._config.name || t("name");
     this._renderSignal();
+    this._renderConn(v);
     this._renderSettings(v);
     this._updateStatus();
     this._renderTabs();
@@ -214,6 +215,11 @@ export class IntercomCard extends HTMLElement {
     const sig = this._root.querySelector(".sig");
     sig.innerHTML = [4, 7, 10, 12].map((h, i) => `<i class="${i < bars ? "" : "off"}" style="height:${h}px"></i>`).join("");
     sig.title = dbm === null ? "" : `${dbm} dBm`;
+  }
+
+  // Green dot in the header: the intercom is on the network. Red: it is not.
+  _renderConn(v) {
+    this._root.querySelector(".conn").title = v.online ? this._t("settings.online") : this._t("settings.offline");
   }
 
   _renderSettings(v) {

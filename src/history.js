@@ -5,8 +5,7 @@
 //   code_entry  binary_sensor, "on" while a code is being typed   -> "code" (the code itself is not exposed)
 //   door/gate/  ESPHome buttons: the state is the time of the last -> "door" / "gate" / "reject"
 //   reject      press, so every press is a state change
-//   courier     switch                                            -> "courier_on" / "courier_off", and
-//                                                                     "offline" / "online" (unavailable <-> any)
+//   courier     switch                                            -> "courier_on" / "courier_off"
 // Who pressed a button (card, Telegram, courier mode) is not recorded anywhere.
 
 const MAX_EVENTS = 300;
@@ -63,21 +62,13 @@ export function parseHistory(result, entities, startMs) {
   }
 
   // Courier mode: only a real on <-> off change counts. A return from "unavailable"
-  // (the device dropped off the network) is not the mode being switched. The same
-  // series gives the device going offline / back online (the ring sensor stands in
-  // when there is no courier switch).
+  // (the device dropped off the network, or HA restarted) is not the mode being switched.
   let prev = null;
-  for (const r of changes(rows("courier") || rows("ring"), startMs)) {
+  for (const r of changes(rows("courier"), startMs)) {
     const was = prev;
     prev = r.s;
-    if (!r.inside || was === null) continue;
-    if (r.s === "unavailable") {
-      if (was !== "unavailable") events.push({ kind: "offline", ms: r.ms });
-    } else if (was === "unavailable") {
-      events.push({ kind: "online", ms: r.ms });
-    } else if (entities.courier && r.s !== was && (r.s === "on" || r.s === "off")) {
-      events.push({ kind: r.s === "on" ? "courier_on" : "courier_off", ms: r.ms });
-    }
+    if (!r.inside || (r.s !== "on" && r.s !== "off") || (was !== "on" && was !== "off") || r.s === was) continue;
+    events.push({ kind: r.s === "on" ? "courier_on" : "courier_off", ms: r.ms });
   }
 
   return events.sort((a, b) => b.ms - a.ms).slice(0, MAX_EVENTS);

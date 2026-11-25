@@ -35,6 +35,8 @@ svg { width: 1em; height: 1em; fill: currentColor; display: block; }
 
 .hd { display: flex; align-items: center; justify-content: space-between; font-size: 11px; opacity: .85; }
 .hd-r { display: flex; align-items: center; gap: 8px; }
+.conn { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
+.offline .conn { background: var(--red); box-shadow: 0 0 6px var(--red); }
 .sig { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
 .sig i { width: 3px; background: currentColor; border-radius: 1px; }
 .sig i.off { opacity: .25; }

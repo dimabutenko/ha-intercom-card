@@ -16,8 +16,8 @@ and mute switches), but every entity is configurable. No brand marks, shapes onl
 
 - **Live status on the LCD.** Ready, ringing (with a seconds counter), entering a code, courier mode waiting, no connection.
   The screen and the panel frame change colour: green, amber (ring), blue (courier), red (offline).
-- **History on the screen.** Rings (with duration), code entries, door and gate openings, rejected calls, courier mode
-  on/off and the intercom going offline / back online, grouped by day. Filters: All / Rings / Codes / Openings. Tap a row for the exact time and the length of a call.
+- **History on the screen.** Rings (with duration), code entries, door and gate openings, rejected calls and courier mode
+  on/off, grouped by day. Filters: All / Rings / Codes / Openings. Tap a row for the exact time and the length of a call.
   Taken from the recorder, so it survives restarts; the list refreshes by itself when something happens.
 - **Keys that make sense.** *Open door*, *Gate* and *Reject* are only live during a call (the intercom ignores them
   otherwise) and the door key pulses while it rings.
