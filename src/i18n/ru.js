@@ -20,6 +20,8 @@ export default {
     reject: "Отклонён",
     courier_on: "Курьер вкл",
     courier_off: "Курьер выкл",
+    offline: "Домофон офлайн",
+    online: "Домофон онлайн",
   },
   days: { today: "Сегодня", yesterday: "Вчера" },
   now: "сейчас",

@@ -22,6 +22,8 @@ export default {
     reject: "Rejected",
     courier_on: "Courier on",
     courier_off: "Courier off",
+    offline: "Intercom offline",
+    online: "Intercom online",
   },
   days: { today: "Today", yesterday: "Yesterday" },
   now: "now",
